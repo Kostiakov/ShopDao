@@ -32,6 +32,20 @@ public class ShopRestController {
 		return list;
 	}
 	
+	@PostMapping("/search")
+	public ProductList searchProducts(@RequestBody Food food) {
+		List<Product> theProducts = dao.getProduct(food.getName());
+		ProductList list = new ProductList();
+		list.setList(theProducts);
+		return list;
+	}
+	
+	@PostMapping("/order")
+	public Product orderProducts(@RequestBody Food food) {
+		Product theProduct = dao.getProductForOrder(food.getName());
+		return theProduct;
+	}
+	
 	@PostMapping("/products/food")
 	public Product addFood(@RequestBody Food food) {
 		dao.addProduct(food);
